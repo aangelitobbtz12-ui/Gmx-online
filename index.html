@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GMX ONLINE</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101010;color:white;font-family:Arial,sans-serif}
+header{background:#1b1b1b;padding:22px;text-align:center;border-bottom:3px solid #e00025}
+header h1{margin:0;color:#ff163b;font-size:38px}
+header p{letter-spacing:4px;margin:5px}
+.hero{text-align:center;padding:35px 15px;background:linear-gradient(135deg,#39000b,#111)}
+.hero h2{font-size:27px}
+.hero span{color:#ff163b}
+main{padding:18px;max-width:850px;margin:auto}
+h2.section{border-left:4px solid #ed1236;padding-left:10px}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.product{background:#202020;padding:17px;border-radius:12px;text-align:center;border:1px solid #333}
+.product .emoji{font-size:38px}
+.product h3{margin:10px 0}
+.product p{color:#bbb;font-size:13px}
+button{background:#e90032;color:white;border:0;padding:12px;border-radius:8px;font-weight:bold;cursor:pointer}
+.product button{width:100%}
+.cart{background:#202020;padding:18px;border-radius:12px;margin-top:25px}
+input,select{width:100%;padding:13px;margin:8px 0;background:#303030;color:white;border:1px solid #555;border-radius:7px}
+footer{text-align:center;padding:25px;color:#aaa}
+@media(max-width:400px){.products{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<h1>GMX</h1>
+<p>ONLINE</p>
+</header>
+
+<section class="hero">
+<h2>BIENVENIDO A <span>GMX ONLINE</span></h2>
+<p>Tu tienda de Free Fire</p>
+<p>💎 DIAMANTES | 📦 CAJAS | 🔹 FRAGMENTOS</p>
+</section>
+
+<main>
+<h2 class="section">Nuestros productos</h2>
+<div class="products" id="products"></div>
+
+<section class="cart">
+<h2>🛒 Mi carrito</h2>
+<div id="cart">Tu carrito está vacío.</div>
+<h3 id="total">Total: $0 MXN</h3>
+
+<h3>Datos del pedido</h3>
+<input id="player" placeholder="ID de jugador Free Fire">
+<select id="payment">
+<option value="">Selecciona método de pago</option>
+<option>Mercado Pago</option>
+<option>Transferencia bancaria</option>
+</select>
+<button onclick="checkout()">CONTINUAR PEDIDO</button>
+<p id="message"></p>
+</section>
+</main>
+
+<footer>
+GMX ONLINE © 2026<br>
+Tienda de productos Free Fire
+</footer>
+
+<script>
+const products=[
+{name:"110 Diamantes",price:0,icon:"💎"},
+{name:"341 Diamantes",price:0,icon:"💎"},
+{name:"572 Diamantes",price:0,icon:"💎"},
+{name:"1166 Diamantes",price:0,icon:"💎"},
+{name:"Cajas evolutivas",price:0,icon:"📦"},
+{name:"Fragmentos universales",price:0,icon:"🔹"}
+];
+
+let cart=[];
+
+function renderProducts(){
+document.getElementById("products").innerHTML=products.map((p,i)=>`
+<div class="product">
+<div class="emoji">${p.icon}</div>
+<h3>${p.name}</h3>
+<p>Precio próximamente</p>
+<button onclick="add(${i})">AGREGAR</button>
+</div>`).join("");
+}
+
+function add(i){
+cart.push(products[i]);
+renderCart();
+}
+
+function renderCart(){
+document.getElementById("cart").innerHTML=cart.length?
+cart.map((p,i)=>`${p.icon} ${p.name} <button onclick="removeItem(${i})">Quitar</button>`).join("<hr>"):
+"Tu carrito está vacío.";
+document.getElementById("total").textContent=
+"Total: Por configurar";
+}
+
+function removeItem(i){
+cart.splice(i,1);
+renderCart();
+}
+
+function checkout(){
+const id=document.getElementById("player").value.trim();
+const payment=document.getElementById("payment").value;
+if(!cart.length){alert("Agrega un producto primero");return;}
+if(!id||!payment){alert("Completa tu ID y método de pago");return;}
+document.getElementById("message").textContent=
+"Pedido preparado. Los precios y pagos deben ser configurados por el administrador antes de aceptar compras.";
+}
+
+renderProducts();
+</script>
+</body>
+</html>
