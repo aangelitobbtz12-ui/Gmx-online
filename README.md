@@ -154,30 +154,30 @@ function checkout(){
  const id=document.getElementById("player").value.trim();
  const payment=document.getElementById("payment").value;
 
- if(!cart.length)return alert("Agrega productos al carrito");
- if(!id)return alert("Escribe tu ID de jugador");
- if(!payment)return alert("Selecciona un método de pago");
+ if(!cart.length)return alert("Agrega productos");
+ if(!id)return alert("Escribe tu ID");
+ if(!payment)return alert("Selecciona un pago");
 
  const total=cart.reduce((s,p)=>s+p.price,0);
 
  const products=cart.map(p=>
-   "• "+p.name+" - $"+p.price+" MXN"
+ "• "+p.name+" - $"+p.price+" MXN"
  ).join("\n");
 
  const message=
- "🔥 GMX ONLINE - NUEVO PEDIDO\n\n"+
- "ID de jugador: "+id+"\n\n"+
- "PRODUCTOS:\n"+products+
- "\n\nTOTAL: $"+total+" MXN"+
- "\nMétodo de pago: "+payment+
- "\n\nSolicito confirmar disponibilidad de stock.";
+ "🔥 GMX ONLINE - NUEVO PEDIDO\n"+
+ "ID: "+id+"\n\n"+
+ products+"\n\n"+
+ "TOTAL: $"+total+" MXN\n"+
+ "Pago: "+payment+"\n"+
+ "Favor de confirmar stock.";
 
  const url="https://wa.me/527226449648?text="+
  encodeURIComponent(message);
 
- window.open(url,"_blank");
+ window.location.href=url;
 }
-  
+ 
 
 let total=cart.reduce((s,p)=>s+p.price,0);
 document.getElementById("message").textContent=
