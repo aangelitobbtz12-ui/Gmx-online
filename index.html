@@ -68,14 +68,30 @@ Tienda de productos Free Fire
 </footer>
 
 <script>
+
 const products=[
-{name:"110 Diamantes",price:0,icon:"💎"},
-{name:"341 Diamantes",price:0,icon:"💎"},
-{name:"572 Diamantes",price:0,icon:"💎"},
-{name:"1166 Diamantes",price:0,icon:"💎"},
-{name:"Cajas evolutivas",price:0,icon:"📦"},
-{name:"Fragmentos universales",price:0,icon:"🔹"}
+{name:"110 Diamantes",price:19,icon:"💎"},
+{name:"341 Diamantes",price:58,icon:"💎"},
+{name:"572 Diamantes",price:85,icon:"💎"},
+{name:"1166 Diamantes",price:175,icon:"💎"},
+{name:"2396 Diamantes",price:315,icon:"💎"},
+{name:"6160 Diamantes",price:730,icon:"💎"},
+{name:"900 Fragmentos",price:850,icon:"💠"},
+{name:"800 Fragmentos",price:710,icon:"💠"},
+{name:"700 Fragmentos",price:605,icon:"💠"},
+{name:"600 Fragmentos",price:500,icon:"💠"},
+{name:"500 Fragmentos",price:470,icon:"💠"},
+{name:"400 Fragmentos",price:359,icon:"💠"},
+{name:"300 Fragmentos",price:292,icon:"💠"},
+{name:"200 Fragmentos",price:198,icon:"💠"},
+{name:"50 Cajitas",price:200,icon:"🎁"},
+{name:"100 Cajitas",price:385,icon:"🎁"},
+{name:"150 Cajitas",price:550,icon:"🎁"},
+{name:"200 Cajitas",price:685,icon:"🎁"},
+{name:"250 Cajitas",price:800,icon:"🎁"},
+{name:"300 Cajitas",price:975,icon:"🎁"}
 ];
+  
 
 let cart=[];
 
@@ -107,14 +123,35 @@ cart.splice(i,1);
 renderCart();
 }
 
+
 function checkout(){
-const id=document.getElementById("player").value.trim();
-const payment=document.getElementById("payment").value;
-if(!cart.length){alert("Agrega un producto primero");return;}
-if(!id||!payment){alert("Completa tu ID y método de pago");return;}
-document.getElementById("message").textContent=
-"Pedido preparado. Los precios y pagos deben ser configurados por el administrador antes de aceptar compras.";
+ const id=document.getElementById("player").value.trim();
+ const payment=document.getElementById("payment").value;
+
+ if(!cart.length)return alert("Agrega productos");
+ if(!id)return alert("Escribe tu ID de jugador");
+ if(!payment)return alert("Selecciona un método de pago");
+
+ const total=cart.reduce((s,p)=>s+p.price,0);
+
+ const products=cart.map(p=>
+ "• "+p.name+" - $"+p.price+" MXN"
+ ).join("\n");
+
+ const message=
+ "🔥 GMX ONLINE - NUEVO PEDIDO\n\n"+
+ "ID: "+id+"\n\n"+
+ products+"\n\n"+
+ "TOTAL: $"+total+" MXN\n"+
+ "PAGO: "+payment+"\n\n"+
+ "Solicito confirmar disponibilidad de stock.";
+
+ const url="https://wa.me/527226449648?text="+
+ encodeURIComponent(message);
+
+ window.location.href=url;
 }
+  
 
 renderProducts();
 </script>
