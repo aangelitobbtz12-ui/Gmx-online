@@ -63,10 +63,10 @@ ANTES DE REALIZAR UNA COMPRA
 <button onclick="checkout()">REALIZAR PEDIDO</button>
 <p id="message"></p>
 </section>
-</main>
 
 <footer>
-GMX ONLINE © 2026<br>
+GMX ONLINE © 2026
+<br>
 Tu tienda de Free Fire
 </footer>
 
