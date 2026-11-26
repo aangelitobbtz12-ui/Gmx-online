@@ -100,7 +100,7 @@ document.getElementById("products").innerHTML=products.map((p,i)=>`
 <div class="product">
 <div class="emoji">${p.icon}</div>
 <h3>${p.name}</h3>
-<p>Precio próximamente</p>
+<p>$${p.price} MXN</p>
 <button onclick="add(${i})">AGREGAR</button>
 </div>`).join("");
 }
@@ -110,13 +110,24 @@ cart.push(products[i]);
 renderCart();
 }
 
+
 function renderCart(){
-document.getElementById("cart").innerHTML=cart.length?
-cart.map((p,i)=>`${p.icon} ${p.name} <button onclick="removeItem(${i})">Quitar</button>`).join("<hr>"):
-"Tu carrito está vacío.";
-document.getElementById("total").textContent=
-"Total: Por configurar";
-}
+ const total=cart.reduce((s,p)=>s+p.price,0);
+
+ document.getElementById("cart").innerHTML=
+ cart.length?
+ cart.map((p,i)=>`
+ <div class="product">
+ ${p.icon} ${p.name} - $${p.price} MXN
+ <button onclick="removeItem(${i})">Quitar</button>
+ </div>
+ `).join("<br>"):
+ "Tu carrito está vacío.";
+
+ document.getElementById("total").textContent=
+ "TOTAL: $"+total+" MXN";
+   }
+  
 
 function removeItem(i){
 cart.splice(i,1);
