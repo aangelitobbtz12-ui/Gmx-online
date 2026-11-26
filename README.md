@@ -149,12 +149,35 @@ document.getElementById("total").textContent=
 "TOTAL: $"+total+" MXN";
 }
 
+
 function checkout(){
-let id=document.getElementById("player").value.trim();
-let payment=document.getElementById("payment").value;
-if(!cart.length)return alert("Agrega productos al carrito");
-if(!id)return alert("Escribe tu ID de jugador");
-if(!payment)return alert("Selecciona un método de pago");
+ const id=document.getElementById("player").value.trim();
+ const payment=document.getElementById("payment").value;
+
+ if(!cart.length)return alert("Agrega productos al carrito");
+ if(!id)return alert("Escribe tu ID de jugador");
+ if(!payment)return alert("Selecciona un método de pago");
+
+ const total=cart.reduce((s,p)=>s+p.price,0);
+
+ const products=cart.map(p=>
+   "• "+p.name+" - $"+p.price+" MXN"
+ ).join("\n");
+
+ const message=
+ "🔥 GMX ONLINE - NUEVO PEDIDO\n\n"+
+ "ID de jugador: "+id+"\n\n"+
+ "PRODUCTOS:\n"+products+
+ "\n\nTOTAL: $"+total+" MXN"+
+ "\nMétodo de pago: "+payment+
+ "\n\nSolicito confirmar disponibilidad de stock.";
+
+ const url="https://wa.me/527226449648?text="+
+ encodeURIComponent(message);
+
+ window.open(url,"_blank");
+}
+  
 
 let total=cart.reduce((s,p)=>s+p.price,0);
 document.getElementById("message").textContent=
