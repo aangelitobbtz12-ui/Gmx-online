@@ -137,18 +137,22 @@ cart.splice(i,1);
 renderCart();
 }
 
-function renderCart(){
-let total=cart.reduce((s,p)=>s+p.price,0);
-document.getElementById("cart").innerHTML=cart.length?
-cart.map((p,i)=>`
-<div class="item">
-${p.name} — $${p.price} MXN
-<button onclick="removeItem(${i})">Quitar</button>
-</div>`).join(""):"Tu carrito está vacío.";
-document.getElementById("total").textContent=
-"TOTAL: $"+total+" MXN";
-}
 
+function renderCart(){
+ let total=cart.reduce((s,p)=>s+p.price,0);
+
+ document.getElementById("cart").innerHTML=cart.length?
+ cart.map((p,i)=>`
+ <div class="item">
+ ${p.name} - $${p.price} MXN
+ <button onclick="removeItem(${i})">Quitar</button>
+ </div>
+ `).join(""):"Tu carrito está vacío.";
+
+ document.getElementById("total").textContent=
+ "TOTAL: $"+total+" MXN";
+}
+ 
 
 function checkout(){
  const id=document.getElementById("player").value.trim();
@@ -178,14 +182,6 @@ function checkout(){
  window.location.href=url;
 }
  
-
-let total=cart.reduce((s,p)=>s+p.price,0);
-document.getElementById("message").textContent=
-"Pedido preparado. Total: $"+total+
-" MXN. Método: "+payment+
-". Debes confirmar stock y recibir instrucciones de pago del administrador. No realices pagos hasta recibir confirmación.";
-}
-
 renderCatalog();
 renderCart();
 </script>
