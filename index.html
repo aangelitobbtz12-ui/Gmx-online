@@ -53,10 +53,16 @@ footer{text-align:center;padding:25px;color:#aaa}
 <h3>Datos del pedido</h3>
 <input id="player" placeholder="ID de jugador Free Fire">
 <select id="payment">
-<option value="">Selecciona método de pago</option>
-<option>Mercado Pago</option>
-<option>Transferencia bancaria</option>
+<option value="Transferencia bancaria" selected>Transferencia bancaria - Spin by OXXO</option>
 </select>
+
+<div class="bank-info">
+<h3>Datos para transferencia</h3>
+<p>Banco: Spin by OXXO</p>
+<p>CLABE: AGREGA_TU_CLABE</p>
+<p>Titular: AGREGA_NOMBRE_DEL_TITULAR</p>
+<p>Envía tu comprobante por WhatsApp.</p>
+</div>
 <button onclick="checkout()">CONTINUAR PEDIDO</button>
 <p id="message"></p>
 </section>
