@@ -64,6 +64,8 @@ footer{text-align:center;padding:25px;color:#aaa}
 <p>Envía tu comprobante por WhatsApp.</p>
 </div>
 <button onclick="checkout()">CONTINUAR PEDIDO</button>
+  <button onclick="sendReceipt()">📸 ENVIAR COMPROBANTE DE PAGO</button>
+<p>Al abrir WhatsApp, adjunta la foto de tu comprobante y envíala.</p>
 <p id="message"></p>
 </section>
 </main>
@@ -168,6 +170,32 @@ function checkout(){
 
  window.location.href=url;
 }
+function sendReceipt(){
+  const id=document.getElementById("player").value.trim();
+  const payment=document.getElementById("payment").value;
+
+  if(!cart.length)return alert("Agrega productos");
+  if(!id)return alert("Escribe tu ID de jugador");
+
+  const total=cart.reduce((s,p)=>s+p.price,0);
+  const productsText=cart.map(p=>
+    "• "+p.name+" - $"+p.price+" MXN"
+  ).join("\n");
+
+  const message=
+    "📸 GMX ONLINE - ENVÍO DE COMPROBANTE\n\n"+
+    "ID: "+id+"\n\n"+
+    productsText+"\n\n"+
+    "TOTAL: $"+total+" MXN\n"+
+    "PAGO: "+payment+"\n\n"+
+    "Adjunto mi comprobante de pago.";
+
+  const url="https://wa.me/527226449648?text="+
+    encodeURIComponent(message);
+
+  window.location.href=url;
+  }
+  
   
 
 renderProducts();
